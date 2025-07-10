@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/08 20:09:54 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/10 18:48:23 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "libft.h"
 
-char	line_reader(void);
+void	ft_echo(int argc, char **argv);
+void	line_reader(void);
 #endif
