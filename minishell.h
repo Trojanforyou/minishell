@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/10 18:48:23 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/11 15:54:35 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 # include <readline/history.h>
 # include "libft.h"
 
+// typedef struct
+// {
+// 	/* data */
+// };
+int	arg_counter(char ** argv);
 void	ft_echo(int argc, char **argv);
 void	line_reader(void);
 #endif

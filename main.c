@@ -6,14 +6,13 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 17:33:08 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/10 19:07:29 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/11 17:52:06 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(int argc, char **argv)
+int main()
 {
 	line_reader();
-	ft_echo(argc, argv);
 }
