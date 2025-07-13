@@ -6,13 +6,13 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 17:33:08 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/11 17:52:06 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/13 21:48:58 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main()
+int main(int argc, char **argv, char **envp)
 {
-	line_reader();
+	line_reader(argc, argv, envp);
 }
