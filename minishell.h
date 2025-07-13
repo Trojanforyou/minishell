@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/13 21:48:35 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/13 23:23:17 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,5 @@ int    ft_pwd(char **argv);
 int 	n_case(char **argv, int *i);
 int    ft_cd(char **argv);
 void	ft_env(char **argv, char **envp);
+void	cool_exit(char **argv);
 #endif

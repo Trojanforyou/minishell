@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/13 22:00:06 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/14 00:12:13 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,25 @@ void	line_reader(int argc, char **argv, char **envp)
 		ft_pwd(argv);
 		ft_cd(argv);
 		ft_env(argv, envp);
+		cool_exit(argv);
 	}
 	free(line);
 }
 
+void	cool_exit(char **argv)
+{
+	if (*argv && ft_strncmp(argv[0], "exit", 5) == 0)
+	{
+		int arg;
+		
+		arg = ft_atoi(argv[1]);
+		// if (argv[0] && !margv[1])
+			write(1, "here", 4);
+		if ((arg >= 0 && arg <= 255))
+			exit(arg);
+		else if ((arg > 255 || arg < 0) && ft_strlen(argv[1]) <= 19)
+			exit((unsigned char)ft_atoi(argv[1]));
+		else if (ft_strlen(argv[1]) > 19)
+			write (1, "yarrak", 7);
+	}
+}

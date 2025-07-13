@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:58:10 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/13 22:00:09 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/13 22:05:47 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int    ft_cd(char **argv)
 
 void	ft_env(char **argv, char **envp)
 {
-	if (ft_strncmp(argv[0], "env", 4) == 0)
+	if (*argv && ft_strncmp(argv[0], "env", 4) == 0)
 	{
 		while (*envp)
 		{
