@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:58:10 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/13 21:11:45 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/13 22:00:09 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,17 @@ int    ft_cd(char **argv)
         }
     }
     return (1);
+}
+
+void	ft_env(char **argv, char **envp)
+{
+	if (ft_strncmp(argv[0], "env", 4) == 0)
+	{
+		while (*envp)
+		{
+			write (1, *envp, ft_strlen(*envp));
+			write (1, "\n", 1);
+			envp++;
+		}
+	}
 }

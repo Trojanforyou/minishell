@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/13 21:58:08 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/13 22:00:06 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,3 @@ void	line_reader(int argc, char **argv, char **envp)
 	free(line);
 }
 
-void	ft_env(char **argv, char **envp)
-{
-	if (ft_strncmp(argv[0], "env", 4) == 0)
-	{
-		while (*envp)
-		{
-			write (1, *envp, ft_strlen(*envp));
-			write (1, "\n", 1);
-			envp++;
-		}
-	}
-}
