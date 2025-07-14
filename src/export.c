@@ -1,18 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 17:33:08 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/14 09:53:15 by msokolov         ###   ########.fr       */
+/*   Created: 2025/07/14 14:53:00 by msokolov          #+#    #+#             */
+/*   Updated: 2025/07/14 15:47:00 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(int argc, char **argv, char **env)
+char	**env_to_arr(t_env	**list)
 {
-	line_reader(argc, argv, env);
+	char	*tmp_key;
+	char	*tmp_val;
+	char 	*arr;
+	while ((*list)->next)
+	{
+		tmp_key = ft_strjoin((*list)->key, "=");
+		tmp_val = ft_strjoin(tmp_key, (*list)->value);
+	}
+}
+
+char	bubble_sort(char	**list)
+{
+	int	i;
+
+	i = get_len(list);
+	if (i)
+	{
+
+	}
+}
+void	ft_export(char **argv, char **env, char **lst)
+{
+	if (ft_strncmp(argv[1], "export", 7) == 0)
+	{
+
+	}
 }

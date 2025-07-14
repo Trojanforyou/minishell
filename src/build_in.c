@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:58:10 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/13 22:05:47 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/14 14:55:04 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int    ft_cd(char **argv)
 {
     const char *path;
     int         res;
-    
+
     if (*argv && ft_strncmp(argv[0], "cd", 3) == 0)
     {
         if (ft_strncmp(argv[0], "cd", 3) == 0 && (!argv[1] || *argv[1] == '~'))
@@ -71,15 +71,15 @@ int    ft_cd(char **argv)
     return (1);
 }
 
-void	ft_env(char **argv, char **envp)
+void	ft_env(char **argv, char **env)
 {
 	if (*argv && ft_strncmp(argv[0], "env", 4) == 0)
 	{
-		while (*envp)
+		while (*env)
 		{
-			write (1, *envp, ft_strlen(*envp));
+			write (1, *env, ft_strlen(*env));
 			write (1, "\n", 1);
-			envp++;
+			env++;
 		}
 	}
 }

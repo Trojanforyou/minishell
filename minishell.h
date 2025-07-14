@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/13 23:23:17 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/14 13:50:32 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,13 @@
 # define PATH_MAX 4096
 # define BUF_MAX 4096
 
-// typedef struct
-// {
-// 	/* data */
-// };
+typedef struct s_env
+{
+	char	*key;
+	char	*value;
+	int		exported;
+	struct s_env *next;
+}	t_env;
 int	    rg_counter(char ** argv);
 void	ft_echo(int argc, char **argv);
 void	line_reader(int argc, char **argv, char **envp);
