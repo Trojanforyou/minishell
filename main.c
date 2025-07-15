@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 17:33:08 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/14 09:53:15 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/15 16:41:20 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 int main(int argc, char **argv, char **env)
 {
-	line_reader(argc, argv, env);
+	t_env	list;
+	line_reader(argc, argv, env, &list);
 }

@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/14 14:54:46 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/15 16:46:30 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	n_case(char **argv, int *i)
 		while (argv[*i][j] == 'n')
 			j++;
 		if (argv[*i][j] != '\0')
-			break ;*env_list, то ты можешь использовать:
+			break ;
 		(*i)++;
 	}
 	return (*i > 1);
@@ -38,7 +38,7 @@ int	arg_counter(char **argv)
 	return (i);
 }
 
-void	line_reader(int argc, char **argv, char **env)
+void	line_reader(int argc, char **argv, char **env, t_env *list)
 {
 	char	*line;
 	while ((line = readline(">")) != NULL)
@@ -52,6 +52,7 @@ void	line_reader(int argc, char **argv, char **env)
 		ft_cd(argv);
 		ft_env(argv, env);
 		cool_exit(argv);
+		ft_export(argv, &list);
 	}
 	free(line);
 }
@@ -80,13 +81,19 @@ void	cool_exit(char **argv)
 		}
 	}
 }
-int	get_len(char **arr)
+int	get_env_len(t_env **list)
 {
 	int	i;
+	t_env	*curr;
 
 	i = 0;
-	while (arr[i])
+	curr = *list;
+	while (curr)
+	{
+		printf("here\n");
+		curr = curr->next;
 		i++;
+	}
 	return (i);
 }
 
