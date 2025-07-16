@@ -6,13 +6,13 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:58:10 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/14 14:55:04 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/16 17:31:34 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int ft_pwd(char **argv)
+char ft_pwd(char **argv)
 {
     char    buf[BUF_MAX];
     char    *str;

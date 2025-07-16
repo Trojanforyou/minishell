@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/15 16:46:30 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/16 17:36:18 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ int	arg_counter(char **argv)
 	return (i);
 }
 
-void	line_reader(int argc, char **argv, char **env, t_env *list)
+void	line_reader(int argc, char **argv, char **env, t_env **list)
 {
 	char	*line;
-	while ((line = readline(">")) != NULL)
+	char	buf[BUF_MAX];
+	while ((line = readline(getcwd(buf, sizeof(buf)))) != NULL) // Experemental
 	{
 		if (*line)
 		add_history(line);
@@ -52,7 +53,7 @@ void	line_reader(int argc, char **argv, char **env, t_env *list)
 		ft_cd(argv);
 		ft_env(argv, env);
 		cool_exit(argv);
-		ft_export(argv, &list);
+		ft_export(argv, list);
 	}
 	free(line);
 }
@@ -90,10 +91,10 @@ int	get_env_len(t_env **list)
 	curr = *list;
 	while (curr)
 	{
-		printf("here\n");
 		curr = curr->next;
 		i++;
 	}
 	return (i);
 }
+
 
