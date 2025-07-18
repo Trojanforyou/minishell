@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/16 17:36:18 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/18 16:44:37 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	arg_counter(char **argv)
 void	line_reader(int argc, char **argv, char **env, t_env **list)
 {
 	char	*line;
-	char	buf[BUF_MAX];
-	while ((line = readline(getcwd(buf, sizeof(buf)))) != NULL) // Experemental
+
+	while ((line = readline("~ ")) != NULL) // Experemental
 	{
 		if (*line)
 		add_history(line);
@@ -95,6 +95,27 @@ int	get_env_len(t_env **list)
 		i++;
 	}
 	return (i);
+}
+void	add_in_list(t_env **list, char *key, char *value, int exported)
+{
+	t_env	*new;
+	t_env	*last;
+
+	last = 0;
+	new = malloc(sizeof(t_env));
+	new->key = ft_strdup(key);
+	new->value = value;
+	new->exported = exported;
+	new->next = NULL;
+	if (!*list)
+		*list = new ;
+	else
+	{
+		last = *list;
+		while (last->next)
+			last = last->next;
+		last->next = new;
+	}
 }
 
 

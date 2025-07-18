@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/16 17:31:07 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/18 15:53:19 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ int		get_env_len(t_env **list);
 char	**env_to_arr(t_env	**list);
 void	ft_export(char **argv, t_env **list);
 void	env_init(t_env **list, char **env);
+void	add_in_list(t_env **list, char *key, char *value, int exported);
 int		ft_strcmp(const char *s1, const char *s2);
 #endif
