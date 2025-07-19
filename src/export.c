@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:53:00 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/19 17:01:13 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/19 20:34:30 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,12 @@ char	**env_to_arr(t_env	**list)
 			tmp_key = ft_strjoin(curr->key, "=");
 			if (curr->value) // Проверяется чуществует ли значение у переменной. Если есть "HELLO=World"
 				tmp_val = ft_strjoin(tmp_key, curr->value); // Идет обьеденение "HELLO=" "World"
-			else // Если значение 0
-				tmp_val = (tmp_key); // Просто копируется "HELLO=" без значение
+			else // Есил значение 0
+				tmp_val = ft_strdup(tmp_key); // Просто копируется "HELLO=" без значение
 			arr[i++] = tmp_val; // Добавляет полученную строку в масив который потом вернет env_to_arr
 		}
 		curr = curr->next;
+		// TODO Add free's
 	}
 	arr[i] = NULL;
 	return (arr);
@@ -102,7 +103,7 @@ void	ft_export(char **argv, t_env **list)
 	j = 0;
 	if (*argv && ft_strncmp(argv[0], "export", 7) == 0)
 	{
-		if (argv[1] && isalnum(argv[1][0]))
+		if (argv[1] && ft_isalnum(argv[1][0]))
 		{
 			while (argv[++j])
 			{

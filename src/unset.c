@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:47:58 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/19 17:16:00 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/19 20:50:28 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void    delete_var(char **argv, t_env **list)
                 else
                    prev->next = curr->next;
             }
-            prev = curr;
+            prev = curr; // Это нужно делать потому что после того как удаляешь элемент из списка prev указывает на то что больше нет. А нужно что бы на новый элемент списка
             curr = curr->next;
         }
         i++;
@@ -42,7 +42,7 @@ void    delete_var(char **argv, t_env **list)
 
 void    ft_unset(char **argv, t_env **list)
 {
-    if (ft_strncmp(argv[0], "unset", 7) == 0)
+    if (*argv && ft_strncmp(argv[0], "unset", 7) == 0)
     {
         if (!argv[1])
             write (2, "unset: not enough arguments\n", 29);

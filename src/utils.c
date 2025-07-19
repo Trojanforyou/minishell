@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/19 17:16:23 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/19 20:21:56 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,19 +97,19 @@ int	get_env_len(t_env **list)
 	}
 	return (i);
 }
-void	add_in_list(t_env **list, char *key, char *value, int exported)
+void	 add_in_list(t_env **list, char *key, char *value, int exported)
 {
 	t_env	*new;
 	t_env	*last;
 
 	last = 0;
 	new = malloc(sizeof(t_env));
-	new->key = (key);
+	new->key = key;
 	new->value = value;
 	new->exported = exported;
 	new->next = NULL;
 	if (!*list)
-		*list = new ;
+		*list = new;
 	else
 	{
 		last = *list;
