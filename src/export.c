@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:53:00 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/18 18:44:42 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/19 17:01:13 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	env_init(t_env **list, char **env)
 	{
 		arg = ft_split(env[i], '=');
 		add_in_list(list, arg[0], arg[1], 1);
-		// free(arg);
 		i++;
 		// TODO Add free's
 	}
@@ -56,7 +55,7 @@ char	**env_to_arr(t_env	**list)
 			if (curr->value) // Проверяется чуществует ли значение у переменной. Если есть "HELLO=World"
 				tmp_val = ft_strjoin(tmp_key, curr->value); // Идет обьеденение "HELLO=" "World"
 			else // Если значение 0
-				tmp_val = ft_strdup(tmp_key); // Просто копируется "HELLO=" без значение
+				tmp_val = (tmp_key); // Просто копируется "HELLO=" без значение
 			arr[i++] = tmp_val; // Добавляет полученную строку в масив который потом вернет env_to_arr
 		}
 		curr = curr->next;
@@ -103,7 +102,7 @@ void	ft_export(char **argv, t_env **list)
 	j = 0;
 	if (*argv && ft_strncmp(argv[0], "export", 7) == 0)
 	{
-		if (argv[0] && argv[1] && isalnum(argv[1]))
+		if (argv[1] && isalnum(argv[1][0]))
 		{
 			while (argv[++j])
 			{

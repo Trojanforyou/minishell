@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/18 15:53:19 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/19 16:01:28 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@
 
 typedef struct s_env
 {
-	char	*key;
-	char	*value;
-	int		exported;
-	struct s_env *next;
+	char			*key;
+	char			*value;
+	int				exported;
+	struct s_env	*next;
+	struct s_env	*prev;
 }	t_env;
 int		arg_counter(char ** argv);
 void	ft_echo(int argc, char **argv);
@@ -49,4 +50,6 @@ void	ft_export(char **argv, t_env **list);
 void	env_init(t_env **list, char **env);
 void	add_in_list(t_env **list, char *key, char *value, int exported);
 int		ft_strcmp(const char *s1, const char *s2);
+void	remove_node(t_env *list, void (*del)(void *));
+void    ft_unset(char **argv, t_env **list);
 #endif

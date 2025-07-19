@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/18 16:44:37 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/19 17:16:23 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	line_reader(int argc, char **argv, char **env, t_env **list)
 {
 	char	*line;
 
-	while ((line = readline("~ ")) != NULL) // Experemental
+	while ((line = readline("➜ ")) != NULL) // Experemental
 	{
 		if (*line)
 		add_history(line);
@@ -54,6 +54,7 @@ void	line_reader(int argc, char **argv, char **env, t_env **list)
 		ft_env(argv, env);
 		cool_exit(argv);
 		ft_export(argv, list);
+		ft_unset(argv, list);
 	}
 	free(line);
 }
@@ -103,7 +104,7 @@ void	add_in_list(t_env **list, char *key, char *value, int exported)
 
 	last = 0;
 	new = malloc(sizeof(t_env));
-	new->key = ft_strdup(key);
+	new->key = (key);
 	new->value = value;
 	new->exported = exported;
 	new->next = NULL;
