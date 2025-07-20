@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/19 16:01:28 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/20 22:55:00 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,33 @@ typedef struct s_env
 	struct s_env	*next;
 	struct s_env	*prev;
 }	t_env;
+
+typedef struct s_parse
+{
+	char	*cmd;
+	char	*args;
+	int		redirect;
+	char	*filename;
+}	t_parse;
+
 int		arg_counter(char ** argv);
-void	ft_echo(int argc, char **argv);
-void	line_reader(int argc, char **argv, char **envp, t_env **list);
-char		ft_pwd(char **argv);
 int		n_case(char **argv, int *i);
+int		ft_strcmp(const char *s1, const char *s2);
 int		ft_cd(char **argv);
+int		get_env_len(t_env **list);
+
+char	ft_pwd(char **argv);
+char	**env_to_arr(t_env	**list);
+char	**tokens(char *line);
+
+void	line_reader(int argc, char **argv, char **envp, t_env **list);
+void	ft_echo(int argc, char **argv);
 void	ft_env(char **argv, char **envp);
 void	cool_exit(char **argv);
-int		get_env_len(t_env **list);
-char	**env_to_arr(t_env	**list);
 void	ft_export(char **argv, t_env **list);
 void	env_init(t_env **list, char **env);
 void	add_in_list(t_env **list, char *key, char *value, int exported);
-int		ft_strcmp(const char *s1, const char *s2);
-void	remove_node(t_env *list, void (*del)(void *));
 void    ft_unset(char **argv, t_env **list);
+// void	remove_node(t_env *list, void (*del)(void *));
+
 #endif

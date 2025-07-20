@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:53:00 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/19 20:34:30 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/20 23:20:27 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 
 void	env_init(t_env **list, char **env)
 {
-	int	i;
+	int		i;
 	char	**arg;
 
 	i = 0;
@@ -69,10 +69,11 @@ char	**bubble_sort(char	**arr)
 {
 	int	i;
 	int	j;
-	int	len = 0;
+	int	len;
 	char *tmp;
 
 	i = 0;
+	len = 0;
 	while (arr[len])
 		len++;
 	while (len - i - 1)
@@ -117,6 +118,7 @@ void	ft_export(char **argv, t_env **list)
 			argv = bubble_sort(arr);
 			while (argv[i])
 				printf("declare -x %s\n", argv[i++]);
+				// TODO Fix the duplication
 		}
 	}
 }

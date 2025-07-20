@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:42:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/18 15:03:19 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/20 18:02:27 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		ft_printf(const char *str, ...);
 int		ft_put_u(unsigned int n);
 int		ft_putchar(int c);
 int		ft_putnbr(int n);
-int	ft_lstsize(t_list *lst);
+int		ft_lstsize(t_list *lst);
 
 char	*ft_strrchr(const char *str, int c);
 char	*ft_strnstr(const char *str, const char *toFind, size_t len);
