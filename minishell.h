@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/20 22:55:00 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/22 18:07:52 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@
 # define PATH_MAX 4096
 # define BUF_MAX 4096
 
+typedef enum e_redir_type
+{
+	RE_INPUT, // <
+	RE_TRUNC, // >
+	RE_APPEND, // >>
+	RE_HEREDOC, // <<
+}	t_redir_type;
 typedef struct s_env
 {
 	char			*key;
@@ -37,13 +44,14 @@ typedef struct s_env
 	struct s_env	*prev;
 }	t_env;
 
-typedef struct s_parse
+typedef struct s_redir
 {
-	char	*cmd;
-	char	*args;
-	int		redirect;
-	char	*filename;
-}	t_parse;
+	char			*file;
+	t_redir_type	type;
+	int				in_fd;
+	int				out_fd;
+	t_redir 		*next;
+}	t_redir;
 
 int		arg_counter(char ** argv);
 int		n_case(char **argv, int *i);

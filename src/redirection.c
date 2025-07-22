@@ -6,46 +6,20 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 14:30:59 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/21 01:07:35 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/22 18:14:27 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	**tokens(char *line)
+void	parse_redirects(char **av)
 {
-	int		i;
-	int		y;
-	char	*token = 0;
-	char	**arr;
-	char	quote;
-	int		start;
+	int	i;
+	t_redir	lst;
 
-	i = -1;
-	y = 0;
-	arr = malloc(sizeof(char *) *ft_strlen(line));
-	while (line[i] == ' ' || line[i] == '\n' || line[i] == '\t' || line[i] == '\v')
-		i++;
-	while (line[++i])
+	i = 0;
 	{
-		start = i;
-		if (line[i] == 34)
-		{
-			quote = line[i];
-			// start = i;
-			while (line[i] != quote)
-				i++;
-			i++;
-			token = ft_substr(line, start + 1, i - start);
-			arr[y++] = token;
-			i++;
-			continue;
-		}
-		while (line[i] != ' ' && line[i] != '\t' && line[i] != '\n' && line[i])
-			i++;
-		token = ft_substr(line, start, i - start);
-		arr[y++] = token;
+	while (av[i])
+		if (av[i] == ">" || av[i] == "<" || av[i] == ">>" || av[i] == "<<")
 	}
-	arr[y] = NULL;
-	return (arr);
 }
