@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/23 16:29:40 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/24 00:49:39 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef enum e_redir_type
 {
 	RE_INPUT, // <
 	RE_TRUNC, // >
-	RE_APPEND, // >
+	RE_APPEND, // >>
 	RE_HEREDOC, // <<
 }	t_redir_type;
 typedef struct s_env
@@ -46,7 +46,7 @@ typedef struct s_env
 
 typedef struct s_redir
 {
-	char			*file;
+	char			*filename;
 	t_redir_type	type;
 	int				fd;
 	t_redir 		*next;
@@ -70,6 +70,7 @@ void	ft_export(char **argv, t_env **list);
 void	env_init(t_env **list, char **env);
 void	add_in_list(t_env **list, char *key, char *value, int exported);
 void    ft_unset(char **argv, t_env **list);
-// void	remove_node(t_env *list, void (*del)(void *));
+
+t_redir	*create_redirect(int type, char **av);
 
 #endif
