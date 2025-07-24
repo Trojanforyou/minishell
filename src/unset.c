@@ -6,12 +6,18 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:47:58 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/24 16:05:55 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/24 23:45:21 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/**
+ * Main fucntion for the unset command. Which is basically:
+ * Searches variables by name and removes them from list
+ * "argv" array of variable names to delete
+ * "list" pointer to pointer of environment variables list head
+ */
 void    delete_var(char **argv, t_env **list)
 {
     t_env   *curr;
@@ -40,6 +46,11 @@ void    delete_var(char **argv, t_env **list)
     // TODO Add free's
 }
 
+/**
+ * Implementation of unset command
+ * "argv" command arguments array
+ * "param" list pointer to pointer of environment variables list head
+ */
 void    ft_unset(char **argv, t_env **list)
 {
     if (*argv && ft_strncmp(argv[0], "unset", 7) == 0)

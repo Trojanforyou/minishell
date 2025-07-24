@@ -6,12 +6,19 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/24 18:15:32 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/25 00:01:34 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/**
+ * Checks and processes the -n flag for echo command
+ * Supports multiple -n flags like (-n, -nn, -nnn)
+ * Returns 1 if at least one valid -n flag found
+ * "argv" command arguments array
+ * "i" pointer to index that will be updated to first non-flag argument
+ */
 int	n_case(char **argv, int *i)
 {
 	int j;
@@ -38,6 +45,30 @@ int	arg_counter(char **argv)
 	return (i);
 }
 
+
+/**
+ * TEMPORARY: Main interactive shell loop for reading and processing user commands.
+ * 
+ * 	Core functionality:
+ * - Uses readline() to get user input with prompt "➜"
+ * - Maintains command history "add_history"
+ * - Processes commands in infinite loop until "eof"
+ * 
+ * Current parsing limitations:
+ * - Currently uses tokens() function which handles basic quote parsing, but thats it
+ * - Does not handle: pipes (|), single quotes, complex redirections, command chaining, 
+ * 	 variable expansion ($HOME, $USER)
+ * 
+ * TODO: Replace with proper parser
+ * For now, only tests individual built-in commands.
+ * 
+ *"argc" command line argument count (unused in current implementation)
+ * "argv" command line arguments (gets overwritten by tokens())
+ * "env" environment variables array
+ * "list" pointer to environment variables linked list
+ * "link" pointer to redirection handling structure (currently broken)
+ */
+
 void	line_reader(int argc, char **argv, char **env, t_env **list, t_redir *link)
 {
 	char	*line;
@@ -46,7 +77,7 @@ void	line_reader(int argc, char **argv, char **env, t_env **list, t_redir *link)
 	{
 		if (*line)
 		add_history(line);
-		argv = ft_split(line, ' ');
+		argv = tokens(line);
 		argc = arg_counter(argv);
 		build_red(link, argv);
 		ft_echo(argc, argv);
@@ -60,6 +91,12 @@ void	line_reader(int argc, char **argv, char **env, t_env **list, t_redir *link)
 	free(line);
 }
 
+/**
+ * Handles the exit command with argument validation
+ * Checks numeric arguments correctness and parameter count
+ * Prints appropriate errors and exits program with correct exit code
+ * "argv" command arguments array
+ */
 void	cool_exit(char **argv)
 {
 	int arg;
@@ -84,6 +121,10 @@ void	cool_exit(char **argv)
 		}
 	}
 }
+/**
+ * Counts the number of elements in environment variables linked list
+ * "list" pointer to the head of environment variables linked list
+ */
 int	get_env_len(t_env **list)
 {
 	int	i;
@@ -98,6 +139,13 @@ int	get_env_len(t_env **list)
 	}
 	return (i);
 }
+/**
+ * Adds a new environment variable to the end of the linked list
+ * "list" pointer to pointer of environment variables list head
+ * "key" variable name
+ * "value" variable value
+ * "exported flag" indicating if variable is exported (1 - yes, 0 - no)
+ */
 void	 add_in_list(t_env **list, char *key, char *value, int exported)
 {
 	t_env	*new;
@@ -105,6 +153,8 @@ void	 add_in_list(t_env **list, char *key, char *value, int exported)
 
 	last = 0;
 	new = malloc(sizeof(t_env));
+	if (!new)
+		return ;
 	new->key = key;
 	new->value = value;
 	new->exported = exported;

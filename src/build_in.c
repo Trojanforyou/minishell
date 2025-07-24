@@ -6,12 +6,17 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:58:10 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/16 17:31:34 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/24 23:40:34 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/**
+ * Implementation of "pwd" command
+ * Gets and prints the current working directory.
+ * "argv" command arguments array
+ */
 char ft_pwd(char **argv)
 {
     char    buf[BUF_MAX];
@@ -27,6 +32,12 @@ char ft_pwd(char **argv)
     return (1);
 }
 
+/**
+ * Implementation of echo command
+ * Prints arguments separated by spaces. Supports -n flag to suppress trailing newline
+ * "argc" argument count
+ * "argv" command arguments array
+ */
 void	ft_echo(int argc, char **argv)
 {
 	int i = 0;
@@ -48,6 +59,11 @@ void	ft_echo(int argc, char **argv)
 	}
 }
 
+/**
+ * Implementation of cd command.
+ * Changes the current working directory. Without arguments or with "~" goes to home
+ * "argv" command arguments array
+ */
 int    ft_cd(char **argv)
 {
     const char *path;
@@ -71,6 +87,12 @@ int    ft_cd(char **argv)
     return (1);
 }
 
+/**
+ * Implementation of env command
+ * Prints all environment variables in KEY=VALUE format
+ * "argv" command arguments array
+ * "env" environment variables array
+ */
 void	ft_env(char **argv, char **env)
 {
 	if (*argv && ft_strncmp(argv[0], "env", 4) == 0)

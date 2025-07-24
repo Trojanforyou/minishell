@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/24 18:04:46 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/24 23:33:19 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_redir
 
 int		arg_counter(char ** argv);
 int		n_case(char **argv, int *i);
-int		ft_strcmp(const char *s1, const char *s2);
+int		env_strcmp(const char *s1, const char *s2);
 int		ft_cd(char **argv);
 int		get_env_len(t_env **list);
 int		parse_redirects(char **av, int type);

@@ -6,13 +6,17 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:53:00 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/24 16:05:31 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/24 23:39:56 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+/**
+ * This is modified strcmp but for the "export" fucnction. The only difference is:
+ * It Compares two strings up to '=' character or end of string
+ */
+int	env_strcmp(const char *s1, const char *s2)
 {
 	while (*s1 && *s2 &&  (*s1 == *s2) && *s1 != '=' && *s2 != '=')
 	{
@@ -22,6 +26,12 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (unsigned char)*s1 - (unsigned char)*s2;
 }
 
+/**
+ * Initializes environment variables linked list from env array
+ * Parses each KEY=VALUE format string and adds to list as exported variable
+ * "list" pointer to pointer of environment variables list head
+ * "env" array of environment variable strings
+ */
 void	env_init(t_env **list, char **env)
 {
 	int		i;
@@ -36,6 +46,11 @@ void	env_init(t_env **list, char **env)
 		// TODO Add free's
 	}
 }
+/**
+ * Converts environment variables linked list to KEY=VALUE format string array
+ * Includes only exported variables if(exported == 1)
+ * "list" pointer to pointer of environment variables list head
+ */
 char	**env_to_arr(t_env	**list)
 {
 	char	*tmp_key;
@@ -65,6 +80,11 @@ char	**env_to_arr(t_env	**list)
 	return (arr);
 }
 
+/**
+ * Just an implementaion of Bubble sort alghoritm 
+ * Used for sorting environment variables "alphabeticaly" when displaying export without arguments
+ * "arr" string array to sort
+ */
 char	**bubble_sort(char	**arr)
 {
 	int	i;
@@ -93,6 +113,14 @@ char	**bubble_sort(char	**arr)
 	}
 	return (arr);
 }
+/**
+ * Implementation of export command
+ * Without arguments, displays all exported variables in sorted order
+ * With arguments, adds new variables to list as exported.
+ * "argv" command arguments array
+ * "list" pointer to pointer of environment variables list head
+ */
+// Currently has the "duplication" issue. Which i'm gonna fix 
 void	ft_export(char **argv, t_env **list)
 {
 	int i;
