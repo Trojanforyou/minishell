@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:47:58 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/24 23:45:21 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/25 00:41:19 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void    delete_var(char **argv, t_env **list)
         curr = *list;
         while (curr)
         {
-            if (ft_strcmp(curr->key, argv[i]) == 0)
+            if (env_strcmp(curr->key, argv[i]) == 0)
             {
                 if (curr == *list)
                     (*list) = curr->next;

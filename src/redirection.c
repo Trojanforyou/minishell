@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 14:30:59 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/24 23:41:32 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/25 00:53:02 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	exec_redir(t_redir *redir)
 		redir->fd = open(redir->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (redir->fd == -1)
 			perror("open");
-		dup2(redir->fd, STDIN_FILENO);
+		dup2(redir->fd, STDOUT_FILENO);
 		close(redir->fd);
 	}
 	else if (redir->type == RE_INPUT)
@@ -80,12 +80,17 @@ int	exec_redir(t_redir *redir)
 		if (redir->fd == -1)
 			perror("open");
 		dup2(redir->fd, STDOUT_FILENO);
+		close(redir->fd);
 	}
 	return (0);
 }
-void	build_red(t_redir *redir, char **av)
+void	build_red(t_redir **redir, char **av)
 {
-	parse_redirects(av, redir->type);
-	create_redirect(redir->type, av);
-	exec_redir(redir);
+	int	type;
+	if (!av || !av[0])  // ← добавить проверку
+        return;
+	type = parse_redirects(av, 0);
+	*redir = create_redirect(type, av);
+	if (*redir)
+		exec_redir(*redir);
 }

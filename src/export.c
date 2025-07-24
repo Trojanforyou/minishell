@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:53:00 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/24 23:39:56 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/25 00:41:04 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	**bubble_sort(char	**arr)
 		j = 0;
 		while (len - j - 1)
 		{
-			if (ft_strcmp(arr[j], arr[j + 1]) > 0)
+			if (env_strcmp(arr[j], arr[j + 1]) > 0)
 			{
 				tmp = arr[j];
 				arr[j] = arr[j + 1];

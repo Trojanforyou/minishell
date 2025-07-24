@@ -1,4 +1,7 @@
-/* ************************************************************************** */
+/* ****************************************************int		arg_counter(char ** argv);
+int		n_case(char **argv, int *i);
+int		has_redirects(char **av);
+int		ft_strcmp(const char *s1, const char *s2);******************* */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
@@ -6,7 +9,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/24 23:33:19 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/25 00:46:34 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +77,7 @@ void	ft_export(char **argv, t_env **list);
 void	env_init(t_env **list, char **env);
 void	add_in_list(t_env **list, char *key, char *value, int exported);
 void    ft_unset(char **argv, t_env **list);
-void	build_red(t_redir *redir, char **av);
+void	build_red(t_redir **redir, char **av);
 
 t_redir	*create_redirect(int type, char **av);
 
