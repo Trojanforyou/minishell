@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/24 16:04:54 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/24 18:15:32 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	arg_counter(char **argv)
 	return (i);
 }
 
-void	line_reader(int argc, char **argv, char **env, t_env **list)
+void	line_reader(int argc, char **argv, char **env, t_env **list, t_redir *link)
 {
 	char	*line;
 
@@ -46,8 +46,9 @@ void	line_reader(int argc, char **argv, char **env, t_env **list)
 	{
 		if (*line)
 		add_history(line);
-		argv = tokens(line);
+		argv = ft_split(line, ' ');
 		argc = arg_counter(argv);
+		build_red(link, argv);
 		ft_echo(argc, argv);
 		ft_pwd(argv);
 		ft_cd(argv);

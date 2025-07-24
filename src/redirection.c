@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 14:30:59 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/24 14:44:20 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/24 18:22:41 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,34 @@ t_redir	*create_redirect(int type, char **av)
 }
 int	exec_redir(t_redir *redir)
 {
-	t_redir	*new;
-
-	new = redir;
 	if (redir->type == RE_TRUNC)
+	{
+		redir->fd = open(redir->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (redir->fd == -1)
+			perror("open");
+		dup2(redir->fd, STDIN_FILENO);
+		close(redir->fd);
+	}
+	else if (redir->type == RE_INPUT)
+	{
+		redir->fd = open(redir->filename, O_RDONLY, 0644);
+		if (redir->fd == -1)
+			perror("open");
+		dup2(redir->fd, STDIN_FILENO);
+		close(redir->fd);
+	}
+	else if (redir->type == RE_APPEND)
+	{
+		redir->fd = open(redir->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		if (redir->fd == -1)
+			perror("open");
+		dup2(redir->fd, STDOUT_FILENO);
+	}
+	return (0);
+}
+void	build_red(t_redir *redir, char **av)
+{
+	parse_redirects(av, redir->type);
+	create_redirect(redir->type, av);
+	exec_redir(redir);
 }
