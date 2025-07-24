@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/21 00:49:59 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/24 16:04:54 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	line_reader(int argc, char **argv, char **env, t_env **list)
 {
 	char	*line;
 
-	while ((line = readline("➜ ")) != NULL) // Experimental
+	while ((line = readline("➜ ")) != NULL)
 	{
 		if (*line)
 		add_history(line);

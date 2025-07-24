@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/24 00:49:39 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/24 13:56:23 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,12 @@ int		n_case(char **argv, int *i);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_cd(char **argv);
 int		get_env_len(t_env **list);
+int		parse_redirects(char **av, int type)
 
 char	ft_pwd(char **argv);
 char	**env_to_arr(t_env	**list);
 char	**tokens(char *line);
+char	*get_redir_file(char **av);
 
 void	line_reader(int argc, char **argv, char **envp, t_env **list);
 void	ft_echo(int argc, char **argv);

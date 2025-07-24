@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:47:58 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/19 20:50:28 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/24 16:05:55 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void    delete_var(char **argv, t_env **list)
     int     i;
 
     i = 0;
-    prev = NULL; // возможно перенести в 1 цикл что бы обновлять каждую итерацию 
+    prev = NULL;
     while (argv[i])
     {
         curr = *list;
@@ -32,7 +32,7 @@ void    delete_var(char **argv, t_env **list)
                 else
                    prev->next = curr->next;
             }
-            prev = curr; // Это нужно делать потому что после того как удаляешь элемент из списка prev указывает на то что больше нет. А нужно что бы на новый элемент списка
+            prev = curr;
             curr = curr->next;
         }
         i++;

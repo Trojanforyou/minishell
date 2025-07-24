@@ -6,12 +6,11 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 14:30:59 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/24 00:49:24 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/24 14:44:20 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 char	*get_redir_file(char **av)
 {
@@ -57,4 +56,10 @@ t_redir	*create_redirect(int type, char **av)
 	new->filename = get_redir_file(av);
 	return(new);
 }
-int	exec_redir()
+int	exec_redir(t_redir *redir)
+{
+	t_redir	*new;
+
+	new = redir;
+	if (redir->type == RE_TRUNC)
+}

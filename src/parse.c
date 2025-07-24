@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 16:18:53 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/22 16:36:16 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/24 16:05:41 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	**tokens(char *line)
 		if (line[i] == 34)
 		{
 			quote = line[i];
-			// printf("here :%c\n", line[i]);
 			i++;
 			while (line[i + 1] != quote)
 				i++;

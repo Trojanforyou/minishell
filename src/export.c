@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:53:00 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/22 16:48:50 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/24 16:05:31 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ char	**env_to_arr(t_env	**list)
 		if (curr->exported == 1)
 		{
 			tmp_key = ft_strjoin(curr->key, "=");
-			if (curr->value) // Проверяется чуществует ли значение у переменной. Если есть "HELLO=World"
-				tmp_val = ft_strjoin(tmp_key, curr->value); // Идет обьеденение "HELLO=" "World"
-			else // Есил значение 0
-				tmp_val = ft_strdup(tmp_key); // Просто копируется "HELLO=" без значение
-			arr[i++] = tmp_val; // Добавляет полученную строку в масив который потом вернет env_to_arr
+			if (curr->value) 
+				tmp_val = ft_strjoin(tmp_key, curr->value);
+			else
+				tmp_val = ft_strdup(tmp_key);
+			arr[i++] = tmp_val;
 		}
 		curr = curr->next;
 		// TODO Add free's
