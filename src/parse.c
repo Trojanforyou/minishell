@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 16:18:53 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/25 00:03:10 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/25 15:06:10 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * Skips leading whitespace and processes double quotes specially
  * "line" input string to tokenize
  */
-// Basically modified split which handles quotes 
+// Basically modified split which handles quotes
 char	**tokens(char *line)
 {
 	int		i;

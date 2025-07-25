@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/25 00:52:29 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/25 17:46:26 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,20 @@ int	arg_counter(char **argv)
 
 /**
  * TEMPORARY: Main interactive shell loop for reading and processing user commands.
- * 
+ *
  * 	Core functionality:
  * - Uses readline() to get user input with prompt "➜"
  * - Maintains command history "add_history"
  * - Processes commands in infinite loop until "eof"
- * 
+ *
  * Current parsing limitations:
  * - Currently uses tokens() function which handles basic quote parsing, but thats it
- * - Does not handle: pipes (|), single quotes, complex redirections, command chaining, 
+ * - Does not handle: pipes (|), single quotes, complex redirections, command chaining,
  * 	 variable expansion ($HOME, $USER)
- * 
+ *
  * TODO: Replace with proper parser
  * For now, only tests individual built-in commands.
- * 
+ *
  *"argc" command line argument count (unused in current implementation)
  * "argv" command line arguments (gets overwritten by tokens())
  * "env" environment variables array
@@ -72,14 +72,15 @@ int	arg_counter(char **argv)
 void	line_reader(int argc, char **argv, char **env, t_env **list, t_redir *link)
 {
 	char	*line;
-
+	int		saved;
 	while ((line = readline("➜ ")) != NULL)
 	{
+		saved = dup(STDOUT_FILENO);
 		if (*line)
 		add_history(line);
 		argv = tokens(line);
 		argc = arg_counter(argv);
-		build_red(link, argv);
+		build_red(&link, argv);
 		ft_echo(argc, argv);
 		ft_pwd(argv);
 		ft_cd(argv);
@@ -87,7 +88,10 @@ void	line_reader(int argc, char **argv, char **env, t_env **list, t_redir *link)
 		cool_exit(argv);
 		ft_export(argv, list);
 		ft_unset(argv, list);
+		dup2(saved, STDOUT_FILENO);
+		close(saved);
 	}
+	free(argv);
 	free(line);
 }
 
