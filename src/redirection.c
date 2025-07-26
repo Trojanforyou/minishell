@@ -6,46 +6,32 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 14:30:59 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/25 18:06:50 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/26 21:45:07 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*get_redir_file(char **av)
+int	get_redir_type(char *str)
 {
-	int	i;
-
-	i = 0;
-	while (av[i])
-	{
-		if (ft_strncmp(av[i], ">>", 2) == 0 || ft_strncmp(av[i], ">", 1) == 0
-		|| ft_strncmp(av[i], "<<", 2) == 0 || ft_strncmp(av[i], "<", 1) == 0)
-			return (av[i + 1]);
-		i++;
-	}
-	return (NULL);
+		if (ft_strncmp(str, ">>", 2) == 0 || ft_strncmp(str, ">", 1) == 0
+		|| ft_strncmp(str, "<<", 2) == 0 || ft_strncmp(str, "<", 1) == 0)
+			return (1);
+		return (0);
 }
-int	parse_redirects(char **av, int type)
+int	parse_redirects(char *str)
 {
-	int	i;
-
-	i = 0;
-	while (av[i])
-	{
-		if (ft_strncmp(av[i], ">>", 2) == 0)
-			type = RE_APPEND;
-		else if (ft_strncmp(av[i], "<<", 2) == 0)
-			type = RE_HEREDOC;
-		else if (ft_strncmp(av[i], ">", 1) == 0)
-			type = RE_TRUNC;
-		else if (ft_strncmp(av[i], "<", 1) == 0)
-			type = RE_INPUT;
-		i++;
-	}
-	return (type);
+	if (ft_strncmp(str, ">>", 2) == 0)
+		return (RE_APPEND);
+	else if (ft_strncmp(str, "<<", 2) == 0)
+		return (RE_HEREDOC);
+	else if (ft_strncmp(str, ">", 1) == 0)
+		return (RE_TRUNC);
+	else if (ft_strncmp(str, "<", 1) == 0)
+		return (RE_INPUT);
+	return (0);
 }
-t_redir	*create_redirect(int type, char **av)
+t_redir	*create_redirect(int type, char *filename)
 {
 	t_redir	*new;
 
@@ -55,20 +41,23 @@ t_redir	*create_redirect(int type, char **av)
 	new->fd = -1;
 	new->next = NULL;
 	new->type = type;
-	new->filename = get_redir_file(av);
+	new->filename = filename;
 	return(new);
 }
 int	exec_redir(t_redir *redir)
 {
-	if (redir->type == RE_TRUNC)
+	if (redir->type == RE_TRUNC || redir->type == RE_APPEND)
 	{
-		redir->fd = open(redir->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (redir->type == RE_TRUNC)
+			redir->fd = open(redir->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		else if (redir->type == RE_APPEND)
+			redir->fd = open(redir->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (redir->fd == -1)
 			return (perror("open"), -1);
 		dup2(redir->fd, STDOUT_FILENO);
 		close(redir->fd);
 	}
-	if (redir->type == RE_INPUT)
+	else if (redir->type == RE_INPUT)
 	{
 		redir->fd = open(redir->filename, O_RDONLY, 0644);
 		if (redir->fd == -1)
@@ -76,30 +65,22 @@ int	exec_redir(t_redir *redir)
 		dup2(redir->fd, STDIN_FILENO);
 		close(redir->fd);
 	}
-	if (redir->type == RE_APPEND)
-	{
-		redir->fd = open(redir->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (redir->fd == -1)
-			perror("open");
-		dup2(redir->fd, STDOUT_FILENO);
-		close(redir->fd);
-	}
 	return (0);
 }
 void	build_red(t_redir **redir, char **av)
 {
-	int	type;
-	int	i = 0;
-
-	if (!*av || !av[0])
-		return ;
+	int		type;
+	int		i;
+	char	*filename;
+	
+	i = 0;
 	while (av[i])
 	{
-		if (ft_strncmp(av[i], ">>", 2) == 0 || ft_strncmp(av[i], ">", 1) == 0
-			|| ft_strncmp(av[i], "<<", 2) == 0 || ft_strncmp(av[i], "<", 1) == 0)
+		if (get_redir_type(av[i]))
 		{
-			type = parse_redirects(av, 0);
-			*redir = create_redirect(type, av);
+			type = parse_redirects(av[i]);
+			filename = av[i + 1];
+			*redir = create_redirect(type, filename);
 			exec_redir(*redir);
 		}
 		i++;

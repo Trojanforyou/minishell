@@ -3,7 +3,7 @@ SRCS_DIR = src
 OBJS_DIR = obj
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_INC)
+CFLAGS = -Wall -Wextra -Werror -I$(LIBFT_INC) -g
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a

@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/25 17:46:26 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/26 16:43:22 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	line_reader(int argc, char **argv, char **env, t_env **list, t_redir *link)
 {
 	char	*line;
 	int		saved;
-	while ((line = readline("➜ ")) != NULL)
+	while ((line = readline("➜ minishell ")) != NULL)
 	{
 		saved = dup(STDOUT_FILENO);
 		if (*line)

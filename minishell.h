@@ -1,7 +1,4 @@
-/* ****************************************************int		arg_counter(char ** argv);
-int		n_case(char **argv, int *i);
-int		has_redirects(char **av);
-int		ft_strcmp(const char *s1, const char *s2);******************* */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
@@ -9,7 +6,7 @@ int		ft_strcmp(const char *s1, const char *s2);******************* */
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/25 00:46:34 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/26 20:39:13 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +58,13 @@ int		n_case(char **argv, int *i);
 int		env_strcmp(const char *s1, const char *s2);
 int		ft_cd(char **argv);
 int		get_env_len(t_env **list);
-int		parse_redirects(char **av, int type);
+int		parse_redirects(char *str);
 int		exec_redir(t_redir *redir);
 
 char	ft_pwd(char **argv);
 char	**env_to_arr(t_env	**list);
 char	**tokens(char *line);
-char	*get_redir_file(char **av);
+int	get_redir_type(char *str);
 
 void	line_reader(int argc, char **argv, char **envp, t_env **list, t_redir *link);
 void	ft_echo(int argc, char **argv);
@@ -79,6 +76,6 @@ void	add_in_list(t_env **list, char *key, char *value, int exported);
 void    ft_unset(char **argv, t_env **list);
 void	build_red(t_redir **redir, char **av);
 
-t_redir	*create_redirect(int type, char **av);
+t_redir	*create_redirect(int type, char *filename);
 
 #endif
