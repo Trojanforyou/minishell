@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:58:10 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/25 15:08:12 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/26 23:29:09 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,21 @@ char ft_pwd(char **argv)
  * "argc" argument count
  * "argv" command arguments array
  */
-void	ft_echo(int argc, char **argv)
+void	ft_echo(char **argv)
 {
-	int i = 0;
+	int i;
 	int	n_flag;
 
-	(void)argc;
+    i = 0;
 	if (argv[0] && ft_strncmp(argv[0], "echo", 5) == 0)
 	{
 		n_flag = n_case(argv, &i);
 		while (argv[i])
 		{
-			write(1, argv[i], ft_strlen(argv[i]));
+            if (get_redir_type(argv[i]))
+                i++;
+            else
+			    write(1, argv[i], ft_strlen(argv[i]));
 			if (argv[i + 1])
 				write (1, " ", 1);
 			i++;

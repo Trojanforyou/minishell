@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/26 20:39:13 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/26 23:35:16 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,21 @@ typedef struct s_redir
 	struct t_redir 		*next;
 }	t_redir;
 
-int		arg_counter(char ** argv);
+int		arg_counter(char **argv);
 int		n_case(char **argv, int *i);
 int		env_strcmp(const char *s1, const char *s2);
 int		ft_cd(char **argv);
 int		get_env_len(t_env **list);
 int		parse_redirects(char *str);
 int		exec_redir(t_redir *redir);
+int		get_redir_type(char *str);
 
 char	ft_pwd(char **argv);
 char	**env_to_arr(t_env	**list);
 char	**tokens(char *line);
-int	get_redir_type(char *str);
 
-void	line_reader(int argc, char **argv, char **envp, t_env **list, t_redir *link);
-void	ft_echo(int argc, char **argv);
+void	line_reader(char **argv, char **envp, t_env **list, t_redir *link);
+void	ft_echo(char **argv);
 void	ft_env(char **argv, char **envp);
 void	cool_exit(char **argv);
 void	ft_export(char **argv, t_env **list);

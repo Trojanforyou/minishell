@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/26 16:43:22 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/26 23:33:47 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,26 +62,24 @@ int	arg_counter(char **argv)
  * TODO: Replace with proper parser
  * For now, only tests individual built-in commands.
  *
- *"argc" command line argument count (unused in current implementation)
  * "argv" command line arguments (gets overwritten by tokens())
  * "env" environment variables array
  * "list" pointer to environment variables linked list
  * "link" pointer to redirection handling structure (currently broken)
  */
 
-void	line_reader(int argc, char **argv, char **env, t_env **list, t_redir *link)
+void	line_reader(char **argv, char **env, t_env **list, t_redir *link)
 {
 	char	*line;
 	int		saved;
-	while ((line = readline("➜ minishell ")) != NULL)
+	while ((line = readline("➜ ")) != NULL)
 	{
 		saved = dup(STDOUT_FILENO);
 		if (*line)
 		add_history(line);
 		argv = tokens(line);
-		argc = arg_counter(argv);
 		build_red(&link, argv);
-		ft_echo(argc, argv);
+		ft_echo(argv);
 		ft_pwd(argv);
 		ft_cd(argv);
 		ft_env(argv, env);
