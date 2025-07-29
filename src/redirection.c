@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 14:30:59 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/26 21:45:07 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:11:57 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	build_red(t_redir **redir, char **av)
 	int		type;
 	int		i;
 	char	*filename;
-	
+
 	i = 0;
 	while (av[i])
 	{
