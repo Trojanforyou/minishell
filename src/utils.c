@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/29 15:19:59 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/05 21:23:56 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,7 @@ void	line_reader(char **argv, char **env, t_env **list, t_redir *link)
 	int		saved;
 	while ((line = readline("➜ ")) != NULL)
 	{
-		if (get_redir_type(*argv) == RE_INPUT)
-			saved = dup(STDIN_FILENO);
-		else
-			saved = dup(STDOUT_FILENO);
+		saved = dup(STDOUT_FILENO);
 		if (*line)
 		add_history(line);
 		argv = tokens(line);
@@ -89,10 +86,8 @@ void	line_reader(char **argv, char **env, t_env **list, t_redir *link)
 		cool_exit(argv);
 		ft_export(argv, list);
 		ft_unset(argv, list);
-		if (get_redir_type(*argv) == RE_INPUT)
-			dup2(saved, STDIN_FILENO);
-		else
-			dup2(saved, STDOUT_FILENO);
+		dup2(saved, STDIN_FILENO);
+		dup2(saved, STDOUT_FILENO);
 		close(saved);
 	}
 	free(argv);

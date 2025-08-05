@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 14:30:59 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/29 15:11:57 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/05 23:48:57 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	build_red(t_redir **redir, char **av)
 		if (get_redir_type(av[i]))
 		{
 			type = parse_redirects(av[i]);
+			if (ft_strlen(av[i]) > 2)
+				printf("Error for more than '>>'");
 			filename = av[i + 1];
 			*redir = create_redirect(type, filename);
 			exec_redir(*redir);
