@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:53:00 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/25 00:41:04 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/06 23:41:51 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,23 +130,20 @@ void	ft_export(char **argv, t_env **list)
 
 	i = 0;
 	j = 0;
-	if (*argv && ft_strncmp(argv[0], "export", 7) == 0)
+	if (argv[1] && ft_isalnum(argv[1][0]))
 	{
-		if (argv[1] && ft_isalnum(argv[1][0]))
+		while (argv[++j])
 		{
-			while (argv[++j])
-			{
-				arg = ft_split(argv[j], '=');
-				add_in_list(list, arg[0], arg[1], 1);
-			}
+			arg = ft_split(argv[j], '=');
+			add_in_list(list, arg[0], arg[1], 1);
 		}
-		else if (argv[0] && !argv[1])
-		{
-			arr = env_to_arr(list);
-			argv = bubble_sort(arr);
-			while (argv[i])
-				printf("declare -x %s\n", argv[i++]);
-				// TODO Fix the duplication
-		}
+	}
+	else if (argv[0] && !argv[1])
+	{
+		arr = env_to_arr(list);
+		argv = bubble_sort(arr);
+		while (argv[i])
+			printf("declare -x %s\n", argv[i++]);
+			// TODO Fix the duplication
 	}
 }

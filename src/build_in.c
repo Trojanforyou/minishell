@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:58:10 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/26 23:29:09 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/06 23:46:48 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,15 @@
  * Gets and prints the current working directory.
  * "argv" command arguments array
  */
-char ft_pwd(char **argv)
+char ft_pwd()
 {
     char    buf[BUF_MAX];
     char    *str;
     str = getcwd(buf, sizeof(buf));
     if (!str)
         return (0);
-    if (*argv && ft_strncmp(argv[0], "pwd", 4) == 0)
-    {
-        write(1, str, ft_strlen(str));
-        write (1, "\n", 1);
-    }
+    write(1, str, ft_strlen(str));
+    write (1, "\n", 1);
     return (1);
 }
 
@@ -44,23 +41,20 @@ void	ft_echo(char **argv)
 	int	n_flag;
 
     i = 0;
-	if (argv[0] && ft_strncmp(argv[0], "echo", 5) == 0)
-	{
-		n_flag = n_case(argv, &i);
-		while (argv[i])
-		{
-            if (get_redir_type(argv[i]))
-                i++;
-            else
-			    write(1, argv[i], ft_strlen(argv[i]));
-			if (argv[i + 1])
-				write (1, " ", 1);
-			i++;
-		}
-		if (!n_flag)
-			write(1, "\n", 1);
+    n_flag = n_case(argv, &i);
+    while (argv[i])
+    {
+        if (get_redir_type(argv[i]))
+            i++;
+        else
+            write(1, argv[i], ft_strlen(argv[i]));
+        if (argv[i + 1])
+            write (1, " ", 1);
+        i++;
+    }
+    if (!n_flag)
+        write(1, "\n", 1);
 	}
-}
 
 /**
  * Implementation of cd command.
@@ -72,20 +66,17 @@ int    ft_cd(char **argv)
     const char *path;
     int         res;
 
-    if (*argv && ft_strncmp(argv[0], "cd", 3) == 0)
+    if (ft_strncmp(argv[0], "cd", 3) == 0 && (!argv[1] || *argv[1] == '~'))
     {
-        if (ft_strncmp(argv[0], "cd", 3) == 0 && (!argv[1] || *argv[1] == '~'))
-        {
-            path = getenv("HOME");
-            res = chdir(path);
-        }
-        else
-        {
-            path = argv[1];
-            res = chdir(path);
-            if (res == -1)
-                perror("cd");
-        }
+        path = getenv("HOME");
+        res = chdir(path);
+    }
+    else
+    {
+        path = argv[1];
+        res = chdir(path);
+        if (res == -1)
+            perror("cd");
     }
     return (1);
 }
@@ -96,15 +87,12 @@ int    ft_cd(char **argv)
  * "argv" command arguments array
  * "env" environment variables array
  */
-void	ft_env(char **argv, char **env)
+void	ft_env(char **env)
 {
-	if (*argv && ft_strncmp(argv[0], "env", 4) == 0)
-	{
-		while (*env)
-		{
-			write (1, *env, ft_strlen(*env));
-			write (1, "\n", 1);
-			env++;
-		}
-	}
+    while (*env)
+    {
+        write (1, *env, ft_strlen(*env));
+        write (1, "\n", 1);
+        env++;
+    }
 }

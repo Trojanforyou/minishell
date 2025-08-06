@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/07/26 23:35:16 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/07 00:33:21 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ int		parse_redirects(char *str);
 int		exec_redir(t_redir *redir);
 int		get_redir_type(char *str);
 
-char	ft_pwd(char **argv);
+char	ft_pwd();
 char	**env_to_arr(t_env	**list);
 char	**tokens(char *line);
-
-void	line_reader(char **argv, char **envp, t_env **list, t_redir *link);
+void    is_build_in(char **argv, char **env, t_env **list, t_redir **redir);
+void	line_reader(char **argv, char **envp, t_env **list, t_redir *redir);
 void	ft_echo(char **argv);
-void	ft_env(char **argv, char **envp);
+void	ft_env(char **envp);
 void	cool_exit(char **argv);
 void	ft_export(char **argv, t_env **list);
 void	env_init(t_env **list, char **env);

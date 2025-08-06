@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/05 21:23:56 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/07 00:33:29 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ int	arg_counter(char **argv)
  *
  * "argv" command line arguments (gets overwritten by tokens())
  * "env" environment variables array
- * "list" pointer to environment variables linked list
- * "link" pointer to redirection handling structure (currently broken)
+ * "list" pointer to environment variables redired list
+ * "redir" pointer to redirection handling structure (currently broken)
  */
 
-void	line_reader(char **argv, char **env, t_env **list, t_redir *link)
+void	line_reader(char **argv, char **env, t_env **list, t_redir *redir)
 {
 	char	*line;
 	int		saved;
@@ -78,14 +78,7 @@ void	line_reader(char **argv, char **env, t_env **list, t_redir *link)
 		if (*line)
 		add_history(line);
 		argv = tokens(line);
-		build_red(&link, argv);
-		ft_echo(argv);
-		ft_pwd(argv);
-		ft_cd(argv);
-		ft_env(argv, env);
-		cool_exit(argv);
-		ft_export(argv, list);
-		ft_unset(argv, list);
+		is_build_in(argv, env, list, &redir);
 		dup2(saved, STDIN_FILENO);
 		dup2(saved, STDOUT_FILENO);
 		close(saved);
@@ -103,30 +96,27 @@ void	line_reader(char **argv, char **env, t_env **list, t_redir *link)
 void	cool_exit(char **argv)
 {
 	int arg;
-	if (*argv && ft_strncmp(argv[0], "exit", 5) == 0)
+	if (!argv[1])
+		exit(0);
+	arg = ft_atoi(argv[1]);
+	if ((*argv[1] < 48 || *argv[1] > 58) && *argv[1] != '-')
 	{
-		if (!argv[1])
-			exit(0);
-		arg = ft_atoi(argv[1]);
-		if ((*argv[1] < 48 || *argv[1] > 58) && *argv[1] != '-')
-		{
-			write(2, "exit: numeric argument required\n", 33);
-			exit (255);
-		}
-		if (argv[1] && argv[2])
-			write(2, "exit: too many arguments\n", 26);
-		else if ((arg >= 255 || arg <= 0 || arg > 0) && ft_strlen(argv[1]) < 19)
-			exit((unsigned char)ft_atoi(argv[1]));
-		else if (ft_strlen(argv[1]) > 19) // TODO Change strlen function with atoll
-		{
-			write (2, "exit: numeric argument required\n", 33);
-			exit((unsigned char)ft_atoi(argv[1]));
-		}
+		write(2, "exit: numeric argument required\n", 33);
+		exit (255);
+	}
+	if (argv[1] && argv[2])
+		write(2, "exit: too many arguments\n", 26);
+	else if ((arg >= 255 || arg <= 0 || arg > 0) && ft_strlen(argv[1]) < 19)
+		exit((unsigned char)ft_atoi(argv[1]));
+	else if (ft_strlen(argv[1]) > 19) // TODO Change strlen function with atoll
+	{
+		write (2, "exit: numeric argument required\n", 33);
+		exit((unsigned char)ft_atoi(argv[1]));
 	}
 }
 /**
- * Counts the number of elements in environment variables linked list
- * "list" pointer to the head of environment variables linked list
+ * Counts the number of elements in environment variables redired list
+ * "list" pointer to the head of environment variables redired list
  */
 int	get_env_len(t_env **list)
 {
@@ -143,7 +133,7 @@ int	get_env_len(t_env **list)
 	return (i);
 }
 /**
- * Adds a new environment variable to the end of the linked list
+ * Adds a new environment variable to the end of the redired list
  * "list" pointer to pointer of environment variables list head
  * "key" variable name
  * "value" variable value
