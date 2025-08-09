@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:53:00 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/06 23:41:51 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/09 22:45:51 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ char	**bubble_sort(char	**arr)
  * "list" pointer to pointer of environment variables list head
  */
 // Currently has the "duplication" issue. Which i'm gonna fix 
-void	ft_export(char **argv, t_env **list)
+int	ft_export(char **argv, t_env **list)
 {
 	int i;
 	int	j;
@@ -146,4 +146,5 @@ void	ft_export(char **argv, t_env **list)
 			printf("declare -x %s\n", argv[i++]);
 			// TODO Fix the duplication
 	}
+	return (1);
 }

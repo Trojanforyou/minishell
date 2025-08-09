@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:58:10 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/06 23:46:48 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/09 23:30:33 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
  * Gets and prints the current working directory.
  * "argv" command arguments array
  */
-char ft_pwd()
+int ft_pwd(char **argv, char **env)
 {
+    (void)env;
     char    buf[BUF_MAX];
-    char    *str;
-    str = getcwd(buf, sizeof(buf));
-    if (!str)
+    *argv = getcwd(buf, sizeof(buf));
+    if (!argv)
         return (0);
-    write(1, str, ft_strlen(str));
+    write(1, *argv, ft_strlen(*argv));
     write (1, "\n", 1);
     return (1);
 }
@@ -35,10 +35,11 @@ char ft_pwd()
  * "argc" argument count
  * "argv" command arguments array
  */
-void	ft_echo(char **argv)
+int	ft_echo(char **argv, char **env)
 {
 	int i;
 	int	n_flag;
+    (void)env;
 
     i = 0;
     n_flag = n_case(argv, &i);
@@ -54,19 +55,21 @@ void	ft_echo(char **argv)
     }
     if (!n_flag)
         write(1, "\n", 1);
-	}
+    return (1);    
+}
 
 /**
  * Implementation of cd command.
  * Changes the current working directory. Without arguments or with "~" goes to home
  * "argv" command arguments array
  */
-int    ft_cd(char **argv)
+int    ft_cd(char **argv, char **env)
 {
+    (void)env;
     const char *path;
     int         res;
 
-    if (ft_strncmp(argv[0], "cd", 3) == 0 && (!argv[1] || *argv[1] == '~'))
+    if (!ft_strncmp(argv[0], "cd", 2)  || *argv[1] == '~')
     {
         path = getenv("HOME");
         res = chdir(path);
@@ -76,7 +79,7 @@ int    ft_cd(char **argv)
         path = argv[1];
         res = chdir(path);
         if (res == -1)
-            perror("cd");
+            return (perror("cd"), 0);
     }
     return (1);
 }
@@ -87,12 +90,14 @@ int    ft_cd(char **argv)
  * "argv" command arguments array
  * "env" environment variables array
  */
-void	ft_env(char **env)
+int	ft_env(char **argv, char **env)
 {
+    (void)argv;
     while (*env)
     {
         write (1, *env, ft_strlen(*env));
         write (1, "\n", 1);
         env++;
     }
+    return (1);
 }

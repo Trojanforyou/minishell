@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/07 00:33:29 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/09 22:58:52 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	arg_counter(char **argv)
  * "redir" pointer to redirection handling structure (currently broken)
  */
 
-void	line_reader(char **argv, char **env, t_env **list, t_redir *redir)
+void	line_reader(char **argv, char **env, t_env **list)
 {
 	char	*line;
 	int		saved;
@@ -78,7 +78,7 @@ void	line_reader(char **argv, char **env, t_env **list, t_redir *redir)
 		if (*line)
 		add_history(line);
 		argv = tokens(line);
-		is_build_in(argv, env, list, &redir);
+		build_exe(argv, env, list);
 		dup2(saved, STDIN_FILENO);
 		dup2(saved, STDOUT_FILENO);
 		close(saved);
@@ -93,9 +93,10 @@ void	line_reader(char **argv, char **env, t_env **list, t_redir *redir)
  * Prints appropriate errors and exits program with correct exit code
  * "argv" command arguments array
  */
-void	cool_exit(char **argv)
+int	cool_exit(char **argv, char **env)
 {
 	int arg;
+	(void)env;
 	if (!argv[1])
 		exit(0);
 	arg = ft_atoi(argv[1]);
@@ -113,6 +114,7 @@ void	cool_exit(char **argv)
 		write (2, "exit: numeric argument required\n", 33);
 		exit((unsigned char)ft_atoi(argv[1]));
 	}
+	return (1);
 }
 /**
  * Counts the number of elements in environment variables redired list

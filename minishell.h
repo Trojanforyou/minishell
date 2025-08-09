@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/07 00:33:21 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/09 23:00:07 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,24 +56,24 @@ typedef struct s_redir
 int		arg_counter(char **argv);
 int		n_case(char **argv, int *i);
 int		env_strcmp(const char *s1, const char *s2);
-int		ft_cd(char **argv);
+int		ft_cd(char **argv, char **env);
 int		get_env_len(t_env **list);
 int		parse_redirects(char *str);
 int		exec_redir(t_redir *redir);
+int		ft_echo(char **argv, char **env);
+int		ft_env(char **argv, char **env);
 int		get_redir_type(char *str);
+int		cool_exit(char **argv, char **env);
+int		ft_pwd(char **argv, char **env);
+int		ft_export(char **argv, t_env **list);
+int		ft_unset(char **argv, t_env **list);
+int		build_exe(char **argv, char **env, t_env **list);
 
-char	ft_pwd();
 char	**env_to_arr(t_env	**list);
 char	**tokens(char *line);
-void    is_build_in(char **argv, char **env, t_env **list, t_redir **redir);
-void	line_reader(char **argv, char **envp, t_env **list, t_redir *redir);
-void	ft_echo(char **argv);
-void	ft_env(char **envp);
-void	cool_exit(char **argv);
-void	ft_export(char **argv, t_env **list);
+void	line_reader(char **argv, char **envp, t_env **list);
 void	env_init(t_env **list, char **env);
 void	add_in_list(t_env **list, char *key, char *value, int exported);
-void    ft_unset(char **argv, t_env **list);
 void	build_red(t_redir **redir, char **av);
 
 t_redir	*create_redirect(int type, char *filename);

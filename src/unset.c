@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:47:58 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/06 23:42:17 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/09 22:46:56 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ void    delete_var(char **argv, t_env **list)
  * "argv" command arguments array
  * "param" list pointer to pointer of environment variables list head
  */
-void    ft_unset(char **argv, t_env **list)
+int    ft_unset(char **argv, t_env **list)
 {
     if (!argv[1])
         write (2, "unset: not enough arguments\n", 29);
     else
         delete_var(argv, list);
+    return (1);
 }
