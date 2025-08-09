@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/10 00:24:31 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/10 00:38:00 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	line_reader(char **argv, char **env, t_env **list)
 		saved = dup(STDOUT_FILENO);
 		if (*line)
 		add_history(line);
-		argv = ft_split(line, ' ');
+		argv = tokens(line);
 		build_exe(argv, env, list);
 		dup2(saved, STDIN_FILENO);
 		dup2(saved, STDOUT_FILENO);

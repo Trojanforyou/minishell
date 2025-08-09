@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:58:10 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/10 00:25:42 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/10 00:38:16 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int ft_pwd(char **argv, char **env)
  * "argc" argument count
  * "argv" command arguments array
  */
-void	ft_echo(char **argv, char **env)
+int	ft_echo(char **argv, char **env)
 {
 	int i;
 	int	n_flag;
@@ -54,7 +54,8 @@ void	ft_echo(char **argv, char **env)
         i++;
     }
     if (!n_flag)
-        write(1, "\n", 1);    
+        write(1, "\n", 1);
+    return (1);    
 }
 
 /**
