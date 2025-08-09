@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 20:09:41 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/09 22:57:51 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/10 00:31:14 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static	int (*get_easy_builds(char *cmd))(char **argv, char **env)
 
 static int (*get_hard_build(char *cmd))(char **argv, t_env **list)
 {
-	if (!ft_strncmp(cmd, "export", 7) && ft_strlen(cmd) == 7)
+	if (!ft_strncmp(cmd, "export", 6) && ft_strlen(cmd) == 6)
 		return (ft_export);
 	else if (!ft_strncmp(cmd, "unset", 5) && ft_strlen(cmd) == 5)
 		return (ft_unset);
@@ -58,19 +58,17 @@ int	build_exe(char **argv, char **env, t_env **list)
 {
 	int	(*easy_func)(char **argv, char **env);
 	int	(*hard_func)(char **argv, t_env	**list);
-	int status;	
+	int status;
     easy_func = get_easy_builds(argv[0]);
     if (easy_func)
     {
-        status = easy_func(argv, env);  // ← ВЫЗЫВАЕМ функцию!
+        status = easy_func(argv, env);
         return (status);
     }
-    
-    // Ищем в hard builds
     hard_func = get_hard_build(argv[0]);
     if (hard_func)
     {
-        status = hard_func(argv, list);  // ← ВЫЗЫВАЕМ функцию!
+        status = hard_func(argv, list);
         return (status);
     }
 	return (0);	

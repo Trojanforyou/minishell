@@ -24,6 +24,18 @@
             "logging": {
                 "engineLogging": false
             }
+        },
+        {
+            "name": "Run Minishell",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/minishell",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "preLaunchTask": "build minishell"
         }
     ]
 }

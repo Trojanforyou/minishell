@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:58:10 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/09 23:30:33 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/10 00:25:42 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int ft_pwd(char **argv, char **env)
  * "argc" argument count
  * "argv" command arguments array
  */
-int	ft_echo(char **argv, char **env)
+void	ft_echo(char **argv, char **env)
 {
 	int i;
 	int	n_flag;
@@ -54,8 +54,7 @@ int	ft_echo(char **argv, char **env)
         i++;
     }
     if (!n_flag)
-        write(1, "\n", 1);
-    return (1);    
+        write(1, "\n", 1);    
 }
 
 /**
@@ -69,7 +68,7 @@ int    ft_cd(char **argv, char **env)
     const char *path;
     int         res;
 
-    if (!ft_strncmp(argv[0], "cd", 2)  || *argv[1] == '~')
+    if  (!argv[1] || *argv[1] == '~' || ft_strlen(argv[1]) == 0)
     {
         path = getenv("HOME");
         res = chdir(path);
@@ -78,9 +77,10 @@ int    ft_cd(char **argv, char **env)
     {
         path = argv[1];
         res = chdir(path);
-        if (res == -1)
-            return (perror("cd"), 0);
     }
+    if (res == -1)
+        return (perror("cd"), 0);
+    
     return (1);
 }
 
