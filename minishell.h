@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/10 00:26:08 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/10 22:03:05 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_redir
 	char			*filename;
 	int				type;
 	int				fd;
-	struct t_redir 		*next;
+	int				(*execute)(struct s_redir *self);
 }	t_redir;
 
 int		arg_counter(char **argv);

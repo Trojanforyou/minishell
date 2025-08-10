@@ -9,7 +9,7 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBFT_INC = $(LIBFT_DIR)
 
-SRCS = src/utils.c src/build_in.c src/export.c main.c src/unset.c src/redirection.c src/parse.c src/additional_funcs.c
+SRCS = src/utils.c src/build_in.c src/export.c main.c src/unset.c src/redirection.c src/parse.c src/additional_funcs.c src/redir_utils.c
 OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 
 all: $(NAME)

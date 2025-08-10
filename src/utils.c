@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/10 00:38:00 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/10 22:54:29 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	arg_counter(char **argv)
  * "redir" pointer to redirection handling structure (currently broken)
  */
 
-void	line_reader(char **argv, char **env, t_env **list)
+void	line_reader(char **argv, char **env, t_env **list, t_redir **redir)
 {
 	char	*line;
 	int		saved;
@@ -78,6 +78,7 @@ void	line_reader(char **argv, char **env, t_env **list)
 		if (*line)
 		add_history(line);
 		argv = tokens(line);
+		build_red(redir, argv);
 		build_exe(argv, env, list);
 		dup2(saved, STDIN_FILENO);
 		dup2(saved, STDOUT_FILENO);
