@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 14:30:59 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/10 22:49:13 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/12 13:42:13 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	get_redir_type(char *str)
 {
-		if (ft_strncmp(str, ">>", 2) == 0 || ft_strncmp(str, ">", 1) == 0
-		|| ft_strncmp(str, "<<", 2) == 0 || ft_strncmp(str, "<", 1) == 0)
+		if (!ft_strncmp(str, ">>", 2) || !ft_strncmp(str, ">", 1)
+		|| !ft_strncmp(str, "<<", 2) || !ft_strncmp(str, "<", 1))
 			return (1);
 		return (0);
 }

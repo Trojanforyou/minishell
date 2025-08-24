@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:47:44 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/10 22:03:05 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/12 13:37:02 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		build_exe(char **argv, char **env, t_env **list);
 
 char	**env_to_arr(t_env	**list);
 char	**tokens(char *line);
-void	line_reader(char **argv, char **envp, t_env **list);
+void	line_reader(char **argv, char **envp, t_env **list, t_redir **redir);
 void	env_init(t_env **list, char **env);
 void	add_in_list(t_env **list, char *key, char *value, int exported);
 void	build_red(t_redir **redir, char **av);

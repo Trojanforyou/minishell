@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 19:45:36 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/10 22:54:29 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/12 13:39:35 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ void	line_reader(char **argv, char **env, t_env **list, t_redir **redir)
 		if (*line)
 		add_history(line);
 		argv = tokens(line);
-		build_red(redir, argv);
+		if (!get_redir_type(*argv))
+			build_red(redir, argv);
 		build_exe(argv, env, list);
 		dup2(saved, STDIN_FILENO);
 		dup2(saved, STDOUT_FILENO);

@@ -6,10 +6,9 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 20:09:41 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/10 01:01:32 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/12 13:34:26 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../minishell.h"
 
@@ -45,7 +44,7 @@ int	build_exe(char **argv, char **env, t_env **list)
 {
 	int	(*easy_func)(char **argv, char **env);
 	int	(*hard_func)(char **argv, t_env	**list);
-    
+
 	if (!argv || !argv[0])
 		return (-1);
 	easy_func = get_easy_builds(argv[0]);
@@ -54,5 +53,5 @@ int	build_exe(char **argv, char **env, t_env **list)
 	hard_func = get_hard_build(argv[0]);
     if (hard_func)
 		return (hard_func(argv, list));
-	return (-1);	
+	return (-1);
 }

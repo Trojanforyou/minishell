@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:53:00 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/09 22:45:51 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/12 13:59:58 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	**env_to_arr(t_env	**list)
 		if (curr->exported == 1)
 		{
 			tmp_key = ft_strjoin(curr->key, "=");
-			if (curr->value) 
+			if (curr->value)
 				tmp_val = ft_strjoin(tmp_key, curr->value);
 			else
 				tmp_val = ft_strdup(tmp_key);
@@ -81,7 +81,7 @@ char	**env_to_arr(t_env	**list)
 }
 
 /**
- * Just an implementaion of Bubble sort alghoritm 
+ * Just an implementaion of Bubble sort alghoritm
  * Used for sorting environment variables "alphabeticaly" when displaying export without arguments
  * "arr" string array to sort
  */
@@ -120,7 +120,7 @@ char	**bubble_sort(char	**arr)
  * "argv" command arguments array
  * "list" pointer to pointer of environment variables list head
  */
-// Currently has the "duplication" issue. Which i'm gonna fix 
+// Currently has the "duplication" issue. Which i'm gonna fix
 int	ft_export(char **argv, t_env **list)
 {
 	int i;

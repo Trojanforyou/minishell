@@ -6,7 +6,7 @@
 /*   By: msokolov <msokolov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:58:10 by msokolov          #+#    #+#             */
-/*   Updated: 2025/08/10 00:38:16 by msokolov         ###   ########.fr       */
+/*   Updated: 2025/08/12 13:26:29 by msokolov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_echo(char **argv, char **env)
     }
     if (!n_flag)
         write(1, "\n", 1);
-    return (1);    
+    return (1);
 }
 
 /**
@@ -81,7 +81,7 @@ int    ft_cd(char **argv, char **env)
     }
     if (res == -1)
         return (perror("cd"), 0);
-    
+
     return (1);
 }
 
